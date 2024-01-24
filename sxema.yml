@@ -1,0 +1,3729 @@
+openapi: 3.0.3
+info:
+  title: mashina.kg drf
+  version: 1.0.0
+  description: DRF API
+paths:
+  /api/auth-djoser/token/login/:
+    post:
+      operationId: auth_djoser_token_login_create
+      description: Use this endpoint to obtain user authentication token.
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenCreate'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenCreate'
+          description: ''
+  /api/auth-djoser/token/logout/:
+    post:
+      operationId: auth_djoser_token_logout_create
+      description: Use this endpoint to logout user (remove user authentication token).
+      tags:
+      - auth-djoser
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth-djoser/users/:
+    get:
+      operationId: auth_djoser_users_list
+      tags:
+      - auth-djoser
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+    post:
+      operationId: auth_djoser_users_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreate'
+          description: ''
+  /api/auth-djoser/users/{id}/:
+    get:
+      operationId: auth_djoser_users_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - auth-djoser
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: auth_djoser_users_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: auth_djoser_users_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: auth_djoser_users_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this user.
+        required: true
+      tags:
+      - auth-djoser
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auth-djoser/users/activation/:
+    post:
+      operationId: auth_djoser_users_activation_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Activation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Activation'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activation'
+          description: ''
+  /api/auth-djoser/users/me/:
+    get:
+      operationId: auth_djoser_users_me_retrieve
+      tags:
+      - auth-djoser
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: auth_djoser_users_me_update
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: auth_djoser_users_me_partial_update
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: auth_djoser_users_me_destroy
+      tags:
+      - auth-djoser
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/auth-djoser/users/resend_activation/:
+    post:
+      operationId: auth_djoser_users_resend_activation_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+  /api/auth-djoser/users/reset_password/:
+    post:
+      operationId: auth_djoser_users_reset_password_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+  /api/auth-djoser/users/reset_password_confirm/:
+    post:
+      operationId: auth_djoser_users_reset_password_confirm_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResetConfirm'
+          description: ''
+  /api/auth-djoser/users/reset_username/:
+    post:
+      operationId: auth_djoser_users_reset_username_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SendEmailReset'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendEmailReset'
+          description: ''
+  /api/auth-djoser/users/reset_username_confirm/:
+    post:
+      operationId: auth_djoser_users_reset_username_confirm_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UsernameResetConfirm'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsernameResetConfirm'
+          description: ''
+  /api/auth-djoser/users/set_password/:
+    post:
+      operationId: auth_djoser_users_set_password_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetPassword'
+          description: ''
+  /api/auth-djoser/users/set_username/:
+    post:
+      operationId: auth_djoser_users_set_username_create
+      tags:
+      - auth-djoser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SetUsername'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetUsername'
+          description: ''
+  /api/auth/login/:
+    post:
+      operationId: auth_login_create
+      description: |-
+        Check the credentials and return the REST Token
+        if the credentials are valid and authenticated.
+        Calls Django Auth login method to register User ID
+        in Django session framework
+
+        Accept the following POST parameters: username, password
+        Return the REST Framework Token Object's key.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+          description: ''
+  /api/auth/logout/:
+    post:
+      operationId: auth_logout_create
+      description: |-
+        Calls Django logout method and delete the Token object
+        assigned to the current User object.
+
+        Accepts/Returns nothing.
+      tags:
+      - auth
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/auth/password/change/:
+    post:
+      operationId: auth_password_change_create
+      description: |-
+        Calls Django Auth SetPasswordForm save method.
+
+        Accepts the following POST parameters: new_password1, new_password2
+        Returns the success/fail message.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/auth/password/reset/:
+    post:
+      operationId: auth_password_reset_create
+      description: |-
+        Calls Django Auth PasswordResetForm save method.
+
+        Accepts the following POST parameters: email
+        Returns the success/fail message.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/auth/password/reset/confirm/:
+    post:
+      operationId: auth_password_reset_confirm_create
+      description: |-
+        Password reset e-mail link is confirmed, therefore
+        this resets the user's password.
+
+        Accepts the following POST parameters: token, uid,
+            new_password1, new_password2
+        Returns the success/fail message.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/auth/user/:
+    get:
+      operationId: auth_user_retrieve
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - auth
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+    put:
+      operationId: auth_user_update
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserDetails'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+    patch:
+      operationId: auth_user_partial_update
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserDetails'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetails'
+          description: ''
+  /api/bodytypes/:
+    get:
+      operationId: bodytypes_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - bodytypes
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBodyTypeCategoryList'
+          description: ''
+    post:
+      operationId: bodytypes_create
+      tags:
+      - bodytypes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyTypeCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BodyTypeCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BodyTypeCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BodyTypeCategory'
+          description: ''
+  /api/bodytypes/{id}/:
+    get:
+      operationId: bodytypes_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Тип кузова.
+        required: true
+      tags:
+      - bodytypes
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BodyTypeCategory'
+          description: ''
+    put:
+      operationId: bodytypes_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Тип кузова.
+        required: true
+      tags:
+      - bodytypes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyTypeCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BodyTypeCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BodyTypeCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BodyTypeCategory'
+          description: ''
+    patch:
+      operationId: bodytypes_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Тип кузова.
+        required: true
+      tags:
+      - bodytypes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBodyTypeCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBodyTypeCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBodyTypeCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BodyTypeCategory'
+          description: ''
+    delete:
+      operationId: bodytypes_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Тип кузова.
+        required: true
+      tags:
+      - bodytypes
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/brands/:
+    get:
+      operationId: brands_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - brands
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBrandCategoryList'
+          description: ''
+    post:
+      operationId: brands_create
+      tags:
+      - brands
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BrandCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BrandCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandCategory'
+          description: ''
+  /api/brands/{id}/:
+    get:
+      operationId: brands_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this бренд.
+        required: true
+      tags:
+      - brands
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandCategory'
+          description: ''
+    put:
+      operationId: brands_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this бренд.
+        required: true
+      tags:
+      - brands
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BrandCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BrandCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandCategory'
+          description: ''
+    patch:
+      operationId: brands_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this бренд.
+        required: true
+      tags:
+      - brands
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBrandCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBrandCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBrandCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandCategory'
+          description: ''
+    delete:
+      operationId: brands_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this бренд.
+        required: true
+      tags:
+      - brands
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/carads/:
+    get:
+      operationId: carads_list
+      parameters:
+      - in: query
+        name: body_type
+        schema:
+          type: integer
+      - in: query
+        name: brand
+        schema:
+          type: integer
+      - in: query
+        name: draft
+        schema:
+          type: boolean
+      - in: query
+        name: drive_unit
+        schema:
+          type: integer
+      - in: query
+        name: engine
+        schema:
+          type: integer
+      - in: query
+        name: image
+        schema:
+          type: integer
+      - in: query
+        name: model
+        schema:
+          type: integer
+      - in: query
+        name: modification
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: steering_wheel
+        schema:
+          type: integer
+      - in: query
+        name: transmission
+        schema:
+          type: integer
+      - in: query
+        name: year_of_issue
+        schema:
+          type: integer
+      tags:
+      - carads
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCarAdsList'
+          description: ''
+    post:
+      operationId: carads_create
+      tags:
+      - carads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarAds'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CarAds'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CarAds'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarAds'
+          description: ''
+  /api/carads/{id}/:
+    get:
+      operationId: carads_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ad.
+        required: true
+      tags:
+      - carads
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarAds'
+          description: ''
+    put:
+      operationId: carads_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ad.
+        required: true
+      tags:
+      - carads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarAds'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CarAds'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CarAds'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarAds'
+          description: ''
+    patch:
+      operationId: carads_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ad.
+        required: true
+      tags:
+      - carads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCarAds'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCarAds'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCarAds'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarAds'
+          description: ''
+    delete:
+      operationId: carads_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ad.
+        required: true
+      tags:
+      - carads
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/dj-rest-auth/registration/:
+    post:
+      operationId: dj_rest_auth_registration_create
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+          description: ''
+  /api/dj-rest-auth/registration/resend-email/:
+    post:
+      operationId: dj_rest_auth_registration_resend_email_create
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendEmailVerification'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ResendEmailVerification'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ResendEmailVerification'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/dj-rest-auth/registration/verify-email/:
+    post:
+      operationId: dj_rest_auth_registration_verify_email_create
+      tags:
+      - dj-rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestAuthDetail'
+          description: ''
+  /api/driveunits/:
+    get:
+      operationId: driveunits_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - driveunits
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDriveUnitCategoryList'
+          description: ''
+    post:
+      operationId: driveunits_create
+      tags:
+      - driveunits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriveUnitCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DriveUnitCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DriveUnitCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriveUnitCategory'
+          description: ''
+  /api/driveunits/{id}/:
+    get:
+      operationId: driveunits_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this привод.
+        required: true
+      tags:
+      - driveunits
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriveUnitCategory'
+          description: ''
+    put:
+      operationId: driveunits_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this привод.
+        required: true
+      tags:
+      - driveunits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DriveUnitCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DriveUnitCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DriveUnitCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriveUnitCategory'
+          description: ''
+    patch:
+      operationId: driveunits_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this привод.
+        required: true
+      tags:
+      - driveunits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDriveUnitCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDriveUnitCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDriveUnitCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriveUnitCategory'
+          description: ''
+    delete:
+      operationId: driveunits_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this привод.
+        required: true
+      tags:
+      - driveunits
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/engines/:
+    get:
+      operationId: engines_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - engines
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEngineCategoryList'
+          description: ''
+    post:
+      operationId: engines_create
+      tags:
+      - engines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EngineCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EngineCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EngineCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineCategory'
+          description: ''
+  /api/engines/{id}/:
+    get:
+      operationId: engines_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this двигатель.
+        required: true
+      tags:
+      - engines
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineCategory'
+          description: ''
+    put:
+      operationId: engines_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this двигатель.
+        required: true
+      tags:
+      - engines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EngineCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EngineCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EngineCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineCategory'
+          description: ''
+    patch:
+      operationId: engines_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this двигатель.
+        required: true
+      tags:
+      - engines
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEngineCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEngineCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEngineCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EngineCategory'
+          description: ''
+    delete:
+      operationId: engines_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this двигатель.
+        required: true
+      tags:
+      - engines
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/images/:
+    get:
+      operationId: images_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - images
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedImageCategoryList'
+          description: ''
+    post:
+      operationId: images_create
+      tags:
+      - images
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ImageCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImageCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageCategory'
+          description: ''
+  /api/images/{id}/:
+    get:
+      operationId: images_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Поколение.
+        required: true
+      tags:
+      - images
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageCategory'
+          description: ''
+    put:
+      operationId: images_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Поколение.
+        required: true
+      tags:
+      - images
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ImageCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImageCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageCategory'
+          description: ''
+    patch:
+      operationId: images_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Поколение.
+        required: true
+      tags:
+      - images
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedImageCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedImageCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedImageCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageCategory'
+          description: ''
+    delete:
+      operationId: images_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Поколение.
+        required: true
+      tags:
+      - images
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/img-categories/:
+    get:
+      operationId: img_categories_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - img-categories
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedImgCategoryList'
+          description: ''
+    post:
+      operationId: img_categories_create
+      tags:
+      - img-categories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImgCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ImgCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImgCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImgCategory'
+          description: ''
+  /api/img-categories/{id}/:
+    get:
+      operationId: img_categories_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this img.
+        required: true
+      tags:
+      - img-categories
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImgCategory'
+          description: ''
+    put:
+      operationId: img_categories_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this img.
+        required: true
+      tags:
+      - img-categories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImgCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ImgCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImgCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImgCategory'
+          description: ''
+    patch:
+      operationId: img_categories_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this img.
+        required: true
+      tags:
+      - img-categories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedImgCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedImgCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedImgCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImgCategory'
+          description: ''
+    delete:
+      operationId: img_categories_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this img.
+        required: true
+      tags:
+      - img-categories
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/models/:
+    get:
+      operationId: models_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - models
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedModelCategoryList'
+          description: ''
+    post:
+      operationId: models_create
+      tags:
+      - models
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModelCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ModelCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCategory'
+          description: ''
+  /api/models/{id}/:
+    get:
+      operationId: models_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this модель.
+        required: true
+      tags:
+      - models
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCategory'
+          description: ''
+    put:
+      operationId: models_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this модель.
+        required: true
+      tags:
+      - models
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModelCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ModelCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCategory'
+          description: ''
+    patch:
+      operationId: models_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this модель.
+        required: true
+      tags:
+      - models
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedModelCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedModelCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedModelCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCategory'
+          description: ''
+    delete:
+      operationId: models_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this модель.
+        required: true
+      tags:
+      - models
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/modifications/:
+    get:
+      operationId: modifications_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - modifications
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedModificationCategoryList'
+          description: ''
+    post:
+      operationId: modifications_create
+      tags:
+      - modifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModificationCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ModificationCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationCategory'
+          description: ''
+  /api/modifications/{id}/:
+    get:
+      operationId: modifications_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this модификация.
+        required: true
+      tags:
+      - modifications
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationCategory'
+          description: ''
+    put:
+      operationId: modifications_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this модификация.
+        required: true
+      tags:
+      - modifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificationCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ModificationCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ModificationCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationCategory'
+          description: ''
+    patch:
+      operationId: modifications_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this модификация.
+        required: true
+      tags:
+      - modifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedModificationCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedModificationCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedModificationCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModificationCategory'
+          description: ''
+    delete:
+      operationId: modifications_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this модификация.
+        required: true
+      tags:
+      - modifications
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/steeringwheels/:
+    get:
+      operationId: steeringwheels_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - steeringwheels
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSteeringWheelCategoryList'
+          description: ''
+    post:
+      operationId: steeringwheels_create
+      tags:
+      - steeringwheels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SteeringWheelCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SteeringWheelCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SteeringWheelCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SteeringWheelCategory'
+          description: ''
+  /api/steeringwheels/{id}/:
+    get:
+      operationId: steeringwheels_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this руль.
+        required: true
+      tags:
+      - steeringwheels
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SteeringWheelCategory'
+          description: ''
+    put:
+      operationId: steeringwheels_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this руль.
+        required: true
+      tags:
+      - steeringwheels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SteeringWheelCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SteeringWheelCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SteeringWheelCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SteeringWheelCategory'
+          description: ''
+    patch:
+      operationId: steeringwheels_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this руль.
+        required: true
+      tags:
+      - steeringwheels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSteeringWheelCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSteeringWheelCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSteeringWheelCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SteeringWheelCategory'
+          description: ''
+    delete:
+      operationId: steeringwheels_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this руль.
+        required: true
+      tags:
+      - steeringwheels
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/token/:
+    post:
+      operationId: token_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MyTokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MyTokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MyTokenObtainPair'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyTokenObtainPair'
+          description: ''
+  /api/token/refresh/:
+    post:
+      operationId: token_refresh_create
+      description: |-
+        Takes a refresh type JSON web token and returns an access type JSON web
+        token if the refresh token is valid.
+      tags:
+      - token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+  /api/transmissions/:
+    get:
+      operationId: transmissions_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - transmissions
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTransmissionCategoryList'
+          description: ''
+    post:
+      operationId: transmissions_create
+      tags:
+      - transmissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransmissionCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TransmissionCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TransmissionCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransmissionCategory'
+          description: ''
+  /api/transmissions/{id}/:
+    get:
+      operationId: transmissions_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Коробка передач.
+        required: true
+      tags:
+      - transmissions
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransmissionCategory'
+          description: ''
+    put:
+      operationId: transmissions_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Коробка передач.
+        required: true
+      tags:
+      - transmissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransmissionCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TransmissionCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TransmissionCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransmissionCategory'
+          description: ''
+    patch:
+      operationId: transmissions_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Коробка передач.
+        required: true
+      tags:
+      - transmissions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTransmissionCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTransmissionCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTransmissionCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransmissionCategory'
+          description: ''
+    delete:
+      operationId: transmissions_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Коробка передач.
+        required: true
+      tags:
+      - transmissions
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/years/:
+    get:
+      operationId: years_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - years
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedYearCategoryList'
+          description: ''
+    post:
+      operationId: years_create
+      tags:
+      - years
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/YearCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/YearCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/YearCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearCategory'
+          description: ''
+  /api/years/{id}/:
+    get:
+      operationId: years_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this год выпуска.
+        required: true
+      tags:
+      - years
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearCategory'
+          description: ''
+    put:
+      operationId: years_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this год выпуска.
+        required: true
+      tags:
+      - years
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/YearCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/YearCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/YearCategory'
+        required: true
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearCategory'
+          description: ''
+    patch:
+      operationId: years_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this год выпуска.
+        required: true
+      tags:
+      - years
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedYearCategory'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedYearCategory'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedYearCategory'
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearCategory'
+          description: ''
+    delete:
+      operationId: years_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this год выпуска.
+        required: true
+      tags:
+      - years
+      security:
+      - tokenAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Activation:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - token
+      - uid
+    BodyTypeCategory:
+      type: object
+      properties:
+        body_type:
+          type: string
+          title: Тип кузова
+          maxLength: 100
+      required:
+      - body_type
+    BrandCategory:
+      type: object
+      properties:
+        brand:
+          type: string
+          title: Марка
+          maxLength: 200
+      required:
+      - brand
+    CarAds:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        img:
+          type: array
+          items:
+            type: integer
+        draft:
+          type: boolean
+          title: Черновик
+        link:
+          type: string
+          format: uri
+          nullable: true
+          title: Ссылка
+          maxLength: 200
+        color:
+          allOf:
+          - $ref: '#/components/schemas/ColorEnum'
+          title: Цвет
+        brand:
+          type: integer
+          nullable: true
+          title: Марка
+        model:
+          type: integer
+          nullable: true
+          title: Модель
+        year_of_issue:
+          type: integer
+          nullable: true
+          title: Год выпуска
+        body_type:
+          type: integer
+          nullable: true
+          title: Тип кузова
+        image:
+          type: integer
+          nullable: true
+          title: Поколение
+        engine:
+          type: integer
+          nullable: true
+          title: Двигатель
+        drive_unit:
+          type: integer
+          nullable: true
+          title: Привод
+        transmission:
+          type: integer
+          nullable: true
+          title: Коробка передач
+        modification:
+          type: integer
+          nullable: true
+          title: Модификация
+        steering_wheel:
+          type: integer
+          nullable: true
+          title: Руль
+      required:
+      - id
+      - img
+    ColorEnum:
+      enum:
+      - черный
+      - белый
+      - синий
+      - зеленый
+      - серебристый
+      - серый
+      - бежевый
+      - бирюзовый
+      - бордовый
+      - бронза
+      - вишня
+      - голубой
+      - коричневый
+      - золотистый
+      - жёлтый
+      - красный
+      - оранжевый
+      - розовый
+      - сиреневый
+      - фиолетовый
+      - хамелеон
+      - баклажан
+      type: string
+      description: |-
+        * `черный` - черный
+        * `белый` - белый
+        * `синий` - синий
+        * `зеленый` - зеленый
+        * `серебристый` - серебристый
+        * `серый` - серый
+        * `бежевый` - бежевый
+        * `бирюзовый` - бирюзовый
+        * `бордовый` - бордовый
+        * `бронза` - бронза
+        * `вишня` - вишня
+        * `голубой` - голубой
+        * `коричневый` - коричневый
+        * `золотистый` - золотистый
+        * `жёлтый` - жёлтый
+        * `красный` - красный
+        * `оранжевый` - оранжевый
+        * `розовый` - розовый
+        * `сиреневый` - сиреневый
+        * `фиолетовый` - фиолетовый
+        * `хамелеон` - хамелеон
+        * `баклажан` - баклажан
+    DriveUnitCategory:
+      type: object
+      properties:
+        drive_unit:
+          type: string
+          title: Привод
+          maxLength: 100
+      required:
+      - drive_unit
+    EngineCategory:
+      type: object
+      properties:
+        engine:
+          type: string
+          title: Двигатель
+          maxLength: 100
+      required:
+      - engine
+    ImageCategory:
+      type: object
+      properties:
+        image:
+          type: string
+          format: uri
+          title: Поколение
+      required:
+      - image
+    ImgCategory:
+      type: object
+      properties:
+        img:
+          type: string
+          format: uri
+      required:
+      - img
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+      - password
+    ModelCategory:
+      type: object
+      properties:
+        model:
+          type: string
+          title: Модель
+          maxLength: 100
+      required:
+      - model
+    ModificationCategory:
+      type: object
+      properties:
+        modification:
+          type: number
+          format: double
+          title: Модификация
+      required:
+      - modification
+    MyTokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - password
+      - username
+    PaginatedBodyTypeCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BodyTypeCategory'
+    PaginatedBrandCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandCategory'
+    PaginatedCarAdsList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarAds'
+    PaginatedDriveUnitCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DriveUnitCategory'
+    PaginatedEngineCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EngineCategory'
+    PaginatedImageCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageCategory'
+    PaginatedImgCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImgCategory'
+    PaginatedModelCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelCategory'
+    PaginatedModificationCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModificationCategory'
+    PaginatedSteeringWheelCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SteeringWheelCategory'
+    PaginatedTransmissionCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransmissionCategory'
+    PaginatedYearCategoryList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/YearCategory'
+    PasswordChange:
+      type: object
+      properties:
+        new_password1:
+          type: string
+          maxLength: 128
+        new_password2:
+          type: string
+          maxLength: 128
+      required:
+      - new_password1
+      - new_password2
+    PasswordReset:
+      type: object
+      description: Serializer for requesting a password reset e-mail.
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    PasswordResetConfirm:
+      type: object
+      properties:
+        uid:
+          type: string
+        token:
+          type: string
+        new_password:
+          type: string
+      required:
+      - new_password
+      - token
+      - uid
+    PatchedBodyTypeCategory:
+      type: object
+      properties:
+        body_type:
+          type: string
+          title: Тип кузова
+          maxLength: 100
+    PatchedBrandCategory:
+      type: object
+      properties:
+        brand:
+          type: string
+          title: Марка
+          maxLength: 200
+    PatchedCarAds:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        img:
+          type: array
+          items:
+            type: integer
+        draft:
+          type: boolean
+          title: Черновик
+        link:
+          type: string
+          format: uri
+          nullable: true
+          title: Ссылка
+          maxLength: 200
+        color:
+          allOf:
+          - $ref: '#/components/schemas/ColorEnum'
+          title: Цвет
+        brand:
+          type: integer
+          nullable: true
+          title: Марка
+        model:
+          type: integer
+          nullable: true
+          title: Модель
+        year_of_issue:
+          type: integer
+          nullable: true
+          title: Год выпуска
+        body_type:
+          type: integer
+          nullable: true
+          title: Тип кузова
+        image:
+          type: integer
+          nullable: true
+          title: Поколение
+        engine:
+          type: integer
+          nullable: true
+          title: Двигатель
+        drive_unit:
+          type: integer
+          nullable: true
+          title: Привод
+        transmission:
+          type: integer
+          nullable: true
+          title: Коробка передач
+        modification:
+          type: integer
+          nullable: true
+          title: Модификация
+        steering_wheel:
+          type: integer
+          nullable: true
+          title: Руль
+    PatchedDriveUnitCategory:
+      type: object
+      properties:
+        drive_unit:
+          type: string
+          title: Привод
+          maxLength: 100
+    PatchedEngineCategory:
+      type: object
+      properties:
+        engine:
+          type: string
+          title: Двигатель
+          maxLength: 100
+    PatchedImageCategory:
+      type: object
+      properties:
+        image:
+          type: string
+          format: uri
+          title: Поколение
+    PatchedImgCategory:
+      type: object
+      properties:
+        img:
+          type: string
+          format: uri
+    PatchedModelCategory:
+      type: object
+      properties:
+        model:
+          type: string
+          title: Модель
+          maxLength: 100
+    PatchedModificationCategory:
+      type: object
+      properties:
+        modification:
+          type: number
+          format: double
+          title: Модификация
+    PatchedSteeringWheelCategory:
+      type: object
+      properties:
+        steering_wheel:
+          type: string
+          title: Руль
+          maxLength: 100
+    PatchedTransmissionCategory:
+      type: object
+      properties:
+        transmission:
+          type: string
+          title: Коробка передач
+          maxLength: 100
+    PatchedUser:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+    PatchedUserDetails:
+      type: object
+      description: User model w/o password
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+          title: ID
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+    PatchedYearCategory:
+      type: object
+      properties:
+        year_of_issue:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Год выпуска
+    Register:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 150
+          minLength: 1
+        email:
+          type: string
+          format: email
+        password1:
+          type: string
+          writeOnly: true
+        password2:
+          type: string
+          writeOnly: true
+      required:
+      - password1
+      - password2
+      - username
+    ResendEmailVerification:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+    RestAuthDetail:
+      type: object
+      properties:
+        detail:
+          type: string
+          readOnly: true
+      required:
+      - detail
+    SendEmailReset:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    SetPassword:
+      type: object
+      properties:
+        new_password:
+          type: string
+        current_password:
+          type: string
+      required:
+      - current_password
+      - new_password
+    SetUsername:
+      type: object
+      properties:
+        current_password:
+          type: string
+        new_username:
+          type: string
+          title: Username
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - current_password
+      - new_username
+    SteeringWheelCategory:
+      type: object
+      properties:
+        steering_wheel:
+          type: string
+          title: Руль
+          maxLength: 100
+      required:
+      - steering_wheel
+    Token:
+      type: object
+      description: Serializer for Token model.
+      properties:
+        key:
+          type: string
+          maxLength: 40
+      required:
+      - key
+    TokenCreate:
+      type: object
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+    TokenRefresh:
+      type: object
+      properties:
+        access:
+          type: string
+          readOnly: true
+        refresh:
+          type: string
+      required:
+      - access
+      - refresh
+    TransmissionCategory:
+      type: object
+      properties:
+        transmission:
+          type: string
+          title: Коробка передач
+          maxLength: 100
+      required:
+      - transmission
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          readOnly: true
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+      required:
+      - id
+      - username
+    UserCreate:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        id:
+          type: integer
+          readOnly: true
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - id
+      - password
+      - username
+    UserDetails:
+      type: object
+      description: User model w/o password
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+          title: ID
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      required:
+      - email
+      - pk
+      - username
+    UsernameResetConfirm:
+      type: object
+      properties:
+        new_username:
+          type: string
+          title: Username
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - new_username
+    VerifyEmail:
+      type: object
+      properties:
+        key:
+          type: string
+          writeOnly: true
+      required:
+      - key
+    YearCategory:
+      type: object
+      properties:
+        year_of_issue:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          title: Год выпуска
+      required:
+      - year_of_issue
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
