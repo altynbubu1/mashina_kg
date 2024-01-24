@@ -197,3 +197,5 @@ class CarAds(models.Model):
     class Meta:
         verbose_name = "ad"
         verbose_name_plural = "ads"
+
+# second commit
