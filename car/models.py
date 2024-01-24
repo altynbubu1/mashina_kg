@@ -199,3 +199,4 @@ class CarAds(models.Model):
         verbose_name_plural = "ads"
 
 # second commit
+# bootcamp
